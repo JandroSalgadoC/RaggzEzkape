@@ -15,6 +15,7 @@ public class PlayFabLogin : MonoBehaviour
         }
         var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true};
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+        
     }
 
     private void OnLoginSuccess(LoginResult result)
