@@ -1,13 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayFabRegister : MonoBehaviour
-{
+public class PlayFabRegister : MonoBehaviour{
 
-    public void test()
+    [Header("UI")]
+    public Text outputText;
+    public InputField mail;
+
+    public InputField password;
+    public InputField passwordR;
+    
+
+
+    public void RegisterButton()
     {
-        Debug.Log("click!");
+        try{
+            outputText.text = "Output:";
+            outputText.text += "\nMail: "+mail.text+"\nPassword: " + password.text + "\nPasswordR: " + passwordR.text;
+        }
+        catch(Exception e){
+            Debug.LogException(e, this);
+        }
     }
 
 
