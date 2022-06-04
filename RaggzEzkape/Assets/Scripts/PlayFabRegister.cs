@@ -2,6 +2,8 @@ using System.Text.RegularExpressions;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class PlayFabRegister : MonoBehaviour{
 
@@ -13,7 +15,7 @@ public class PlayFabRegister : MonoBehaviour{
     public InputField passwordR;
 
     String outputMessage;
-    
+
 
 
     public void RegisterButton()
@@ -37,9 +39,8 @@ public class PlayFabRegister : MonoBehaviour{
             outputMessage = "Passwords don't match.";
         }
         else{
-            outputMessage = "Validation Ok!";
+            RegisterRequest(mail.text,password.text);
         }
-
         try{
             outputText.text = outputMessage;
         }
@@ -47,6 +48,28 @@ public class PlayFabRegister : MonoBehaviour{
             Debug.LogException(e, this);
         }
     }
+
+    void RegisterRequest(String mailText, String passwordText){
+        var request = new RegisterPlayFabUserRequest{
+            Email = mailText,
+            Password = passwordText,
+            RequireBothUsernameAndEmail = false
+        };
+        PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterError);
+    }
+
+    void OnRegisterSuccess(RegisterPlayFabUserResult result){
+        outputMessage = "Registered and logged successfully!";
+        outputText.text = outputMessage;
+    }
+
+    void OnRegisterError(PlayFabError error){
+        outputMessage = (error.GenerateErrorReport().Split('\n'))[1];
+        outputText.text = outputMessage;
+        Debug.Log(error.GenerateErrorReport());
+    }
+
+
 
 
 }
