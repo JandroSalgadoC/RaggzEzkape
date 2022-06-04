@@ -41,9 +41,7 @@ public class PlayFabRegister : MonoBehaviour{
         }
 
         try{
-            outputText.text = "Output:";
-            outputText.text += "\nMail: "+mail.text+"\nPassword: " + password.text + "\nPasswordR: " + passwordR.text;
-            outputText.text += "\nMssg: " + outputMessage;
+            outputText.text = outputMessage;
         }
         catch(Exception e){
             Debug.LogException(e, this);
