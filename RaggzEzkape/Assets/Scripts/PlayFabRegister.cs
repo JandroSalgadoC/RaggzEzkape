@@ -61,6 +61,7 @@ public class PlayFabRegister : MonoBehaviour{
     void OnRegisterSuccess(RegisterPlayFabUserResult result){
         outputMessage = "Registered and logged successfully!";
         outputText.text = outputMessage;
+        Debug.Log(result.SessionTicket);
     }
 
     void OnRegisterError(PlayFabError error){
