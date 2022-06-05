@@ -1,32 +1,60 @@
+using System.Text.RegularExpressions;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine;
 
-public class PlayFabLogin : MonoBehaviour
-{
-    public void Start()
+public class PlayFabLogin : MonoBehaviour{
+
+    [Header("UI")]
+    public Text outputText;
+    public InputField mail;
+
+    public InputField password;
+
+    String outputMessage;
+
+
+
+    public void LoginButton()
     {
-        if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId)){
-            /*
-            Please change the titleId below to your own titleId from PlayFab Game Manager.
-            If you have already set the value in the Editor Extensions, this can be skipped.
-            */
-            PlayFabSettings.staticSettings.TitleId = "42";
+        var mailText = mail.text;
+        var passwordText = password.text;
+        outputMessage ="";
+
+        if(mailText.Length == 0 || passwordText.Length == 0){
+            outputMessage = "All fields are required.";
         }
-        var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true};
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
-        
+        else{
+            LoginRequest(mail.text,password.text);
+        }
+        try{
+            outputText.text = outputMessage;
+        }
+        catch(Exception e){
+            Debug.LogException(e, this);
+        }
     }
 
-    private void OnLoginSuccess(LoginResult result)
-    {
-        Debug.Log("Congratulations, you made your first successful API call!");
+    void LoginRequest(String mailText, String passwordText){
+        var request = new LoginWithEmailAddressRequest{
+            Email = mailText,
+            Password = passwordText
+        };
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginError);
     }
 
-    private void OnLoginFailure(PlayFabError error)
-    {
-        Debug.LogWarning("Something went wrong with your first API call.  :(");
-        Debug.LogError("Here's some debug information:");
-        Debug.LogError(error.GenerateErrorReport());
+    void OnLoginSuccess(LoginResult result){
+        outputMessage = "Logged successfully!";
+        outputText.text = outputMessage;
+        Debug.Log(result.SessionTicket);
     }
+
+    void OnLoginError(PlayFabError error){
+        outputMessage = (error.GenerateErrorReport().Split('\n'))[1];
+        outputText.text = outputMessage;
+        Debug.Log(error.GenerateErrorReport());
+    }
+
 }

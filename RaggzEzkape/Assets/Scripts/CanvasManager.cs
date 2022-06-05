@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public enum CanvasType
 {
@@ -34,7 +36,24 @@ public class CanvasManager : Singleton<CanvasManager>
         {
             desiredCanvas.gameObject.SetActive(true);
             lastActiveCanvas = desiredCanvas;
+            if(_type== CanvasType.MainMenu ){
+                Debug.Log("Menu Principal Activo");
+                try{
+                    PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnSuccess, OnError);
+                }catch(PlayFabException e){
+                    Debug.Log("No logeado");
+                }
+                
+            }
         }
         else { Debug.LogWarning("The desired canvas was not found!"); }
+    }
+    public void OnSuccess(GetUserDataResult result){
+        Debug.Log("Logeado");
+        Debug.Log(result);
+    }
+    void OnError(PlayFabError error){
+        Debug.Log("error");
+        Debug.Log(error.GenerateErrorReport());
     }
  }
