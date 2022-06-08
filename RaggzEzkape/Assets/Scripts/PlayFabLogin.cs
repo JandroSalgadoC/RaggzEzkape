@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+using System.Net.Mail;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +9,7 @@ public class PlayFabLogin : MonoBehaviour{
 
     [Header("UI")]
     public Text outputText;
-    public InputField mail;
+    public InputField userNameMail;
 
     public InputField password;
 
@@ -19,15 +19,18 @@ public class PlayFabLogin : MonoBehaviour{
 
     public void LoginButton()
     {
-        var mailText = mail.text;
+        var userOrMail = userNameMail.text;
         var passwordText = password.text;
         outputMessage ="";
 
-        if(mailText.Length == 0 || passwordText.Length == 0){
+        if(userOrMail.Length == 0 || passwordText.Length == 0){
             outputMessage = "All fields are required.";
         }
+        else if(userOrMail.Contains('@')){
+            LoginRequestMail(userOrMail,passwordText);
+        }
         else{
-            LoginRequest(mail.text,password.text);
+            LoginRequestUser(userOrMail,passwordText);
         }
         try{
             outputText.text = outputMessage;
@@ -37,12 +40,20 @@ public class PlayFabLogin : MonoBehaviour{
         }
     }
 
-    void LoginRequest(String mailText, String passwordText){
+    void LoginRequestMail(String mailText, String passwordText){
         var request = new LoginWithEmailAddressRequest{
             Email = mailText,
             Password = passwordText
         };
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginError);
+    }
+
+    void LoginRequestUser(String userText, String passwordText){
+        var request = new LoginWithPlayFabRequest{
+            Username = userText,
+            Password = passwordText
+        };
+        PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginError);
     }
 
     void OnLoginSuccess(LoginResult result){
@@ -56,5 +67,4 @@ public class PlayFabLogin : MonoBehaviour{
         outputMessage = "Error: " + errorMessage[errorMessage.Length-1];
         outputText.text = outputMessage;
     }
-
 }

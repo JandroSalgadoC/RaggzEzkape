@@ -11,6 +11,8 @@ public class PlayFabRegister : MonoBehaviour{
     public Text outputText;
     public InputField mail;
 
+    public InputField userName;
+
     public InputField password;
     public InputField passwordR;
 
@@ -21,16 +23,20 @@ public class PlayFabRegister : MonoBehaviour{
     public void RegisterButton()
     {
         var mailText = mail.text;
+        var userNameText = userName.text;
         var passwordText = password.text;
         var passwordRText = passwordR.text;
         var regex = new Regex(@"\s");
         outputMessage ="";
 
-        if(mailText.Length == 0 || passwordText.Length == 0 || passwordRText.Length == 0){
+        if(mailText.Length == 0 || userNameText.Length == 0 ||passwordText.Length == 0 || passwordRText.Length == 0){
             outputMessage = "All fields are required.";
         }
-        else if(regex.IsMatch(mailText) || regex.IsMatch(passwordText) ||regex.IsMatch(passwordText)){
+        else if(regex.IsMatch(mailText) || regex.IsMatch(userNameText) ||regex.IsMatch(passwordText) ||regex.IsMatch(passwordText)){
             outputMessage = "Whitespaces are not allowed in any field.";
+        }
+        else if(userNameText.Length<3 || userNameText.Length > 10){
+            outputMessage = "Username must be between 3 and 10 characters long.";
         }
         else if(passwordText.Length<6){
             outputMessage = "Password must be at least 6 characters long.";
@@ -39,7 +45,7 @@ public class PlayFabRegister : MonoBehaviour{
             outputMessage = "Passwords don't match.";
         }
         else{
-            RegisterRequest(mail.text,password.text);
+            RegisterRequest(mailText,userNameText,passwordText);
         }
         try{
             outputText.text = outputMessage;
@@ -49,11 +55,11 @@ public class PlayFabRegister : MonoBehaviour{
         }
     }
 
-    void RegisterRequest(String mailText, String passwordText){
+    void RegisterRequest(String mailText, String userNameText ,String passwordText){
         var request = new RegisterPlayFabUserRequest{
             Email = mailText,
-            Password = passwordText,
-            RequireBothUsernameAndEmail = false
+            Username = userNameText,
+            Password = passwordText
         };
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterError);
     }
