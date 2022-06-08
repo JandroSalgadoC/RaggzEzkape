@@ -65,9 +65,9 @@ public class PlayFabRegister : MonoBehaviour{
     }
 
     void OnRegisterError(PlayFabError error){
-        outputMessage = (error.GenerateErrorReport().Split('\n'))[1];
+        var errorMessage = error.GenerateErrorReport().Split(':');
+        outputMessage = "Error: " + errorMessage[errorMessage.Length-1];
         outputText.text = outputMessage;
-        Debug.Log(error.GenerateErrorReport());
     }
 
 }
