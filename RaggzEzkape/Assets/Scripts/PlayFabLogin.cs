@@ -16,7 +16,9 @@ public class PlayFabLogin : MonoBehaviour{
     String outputMessage;
 
 
-
+    private void Awake(){
+        GlobalVariables.OnUsernameChange += UserNameChangeHandler;
+    }
     public void LoginButton()
     {
         var userOrMail = userNameMail.text;
@@ -43,7 +45,10 @@ public class PlayFabLogin : MonoBehaviour{
     void LoginRequestMail(String mailText, String passwordText){
         var request = new LoginWithEmailAddressRequest{
             Email = mailText,
-            Password = passwordText
+            Password = passwordText,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams{
+                GetUserAccountInfo = true
+            }
         };
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginError);
     }
@@ -51,20 +56,29 @@ public class PlayFabLogin : MonoBehaviour{
     void LoginRequestUser(String userText, String passwordText){
         var request = new LoginWithPlayFabRequest{
             Username = userText,
-            Password = passwordText
+            Password = passwordText,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams{
+                GetUserAccountInfo = true
+            }
         };
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginError);
     }
 
     void OnLoginSuccess(LoginResult result){
+        GlobalVariables.OnUsernameChange += UserNameChangeHandler;
         outputMessage = "Logged successfully!";
         outputText.text = outputMessage;
-        Debug.Log(result.SessionTicket);
+        GlobalVariables.Score= 0;
+        GlobalVariables.Playername = result.InfoResultPayload.AccountInfo.Username;
     }
 
     void OnLoginError(PlayFabError error){
         var errorMessage = error.GenerateErrorReport().Split(':');
         outputMessage = "Error: " + errorMessage[errorMessage.Length-1];
         outputText.text = outputMessage;
+    }
+
+    public void UserNameChangeHandler(string username){
+        Debug.Log("Bienvenido "+GlobalVariables.Playername);
     }
 }

@@ -38,11 +38,13 @@ public class CanvasManager : Singleton<CanvasManager>
             lastActiveCanvas = desiredCanvas;
             if(_type== CanvasType.MainMenu ){
                 Debug.Log("Menu Principal Activo");
-                try{
-                    PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnSuccess, OnError);
-                }catch(PlayFabException e){
-                    Debug.Log("No logeado");
+                
+                /*if(GlobalVariables.Playername != null){
+                    Debug.Log("welcome,"+GlobalVariables.Playername);
                 }
+                else{
+                    Debug.Log("Not logged in");
+                }*/
                 
             }
         }
@@ -52,8 +54,10 @@ public class CanvasManager : Singleton<CanvasManager>
         Debug.Log("Logeado");
         Debug.Log(result);
     }
-    void OnError(PlayFabError error){
+    public void OnError(PlayFabError error){
         Debug.Log("error");
         Debug.Log(error.GenerateErrorReport());
     }
+
+
  }

@@ -59,7 +59,10 @@ public class PlayFabRegister : MonoBehaviour{
         var request = new RegisterPlayFabUserRequest{
             Email = mailText,
             Username = userNameText,
-            Password = passwordText
+            Password = passwordText,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams{
+                GetUserAccountInfo = true
+            }
         };
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterError);
     }
@@ -67,7 +70,10 @@ public class PlayFabRegister : MonoBehaviour{
     void OnRegisterSuccess(RegisterPlayFabUserResult result){
         outputMessage = "Registered and logged successfully!";
         outputText.text = outputMessage;
-        Debug.Log(result.SessionTicket);
+        GlobalVariables.Score = 3;
+        GlobalVariables.Playername = userName.text.ToLower();
+        Debug.Log(GlobalVariables.Playername);
+        Debug.Log(GlobalVariables.Score);
     }
 
     void OnRegisterError(PlayFabError error){
@@ -75,5 +81,7 @@ public class PlayFabRegister : MonoBehaviour{
         outputMessage = "Error: " + errorMessage[errorMessage.Length-1];
         outputText.text = outputMessage;
     }
+
+
 
 }
