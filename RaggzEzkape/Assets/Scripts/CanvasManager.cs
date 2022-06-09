@@ -35,28 +35,12 @@ public class CanvasManager : Singleton<CanvasManager>
         if (desiredCanvas != null)
         {
             desiredCanvas.gameObject.SetActive(true);
-            lastActiveCanvas = desiredCanvas;
-            if(_type== CanvasType.MainMenu ){
-                Debug.Log("Menu Principal Activo");
-                
-                /*if(GlobalVariables.Playername != null){
-                    Debug.Log("welcome,"+GlobalVariables.Playername);
-                }
-                else{
-                    Debug.Log("Not logged in");
-                }*/
-                
-            }
-        }
+            lastActiveCanvas = desiredCanvas;        }
         else { Debug.LogWarning("The desired canvas was not found!"); }
     }
-    public void OnSuccess(GetUserDataResult result){
-        Debug.Log("Logeado");
-        Debug.Log(result);
-    }
-    public void OnError(PlayFabError error){
-        Debug.Log("error");
-        Debug.Log(error.GenerateErrorReport());
+
+    public void mainMenuLogged(){
+        Debug.Log("Se activa el Logged Menu");
     }
 
 

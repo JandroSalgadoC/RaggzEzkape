@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26988b2f54655ca47a7a7da4b226d854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasManager: {fileID: 1064470301}
   outputText: {fileID: 641904434}
   userNameMail: {fileID: 848701893}
   password: {fileID: 789018856}

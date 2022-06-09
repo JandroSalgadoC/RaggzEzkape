@@ -7,6 +7,8 @@ using PlayFab.ClientModels;
 
 public class PlayFabLogin : MonoBehaviour{
 
+    public CanvasManager canvasManager;
+
     [Header("UI")]
     public Text outputText;
     public InputField userNameMail;
@@ -70,6 +72,7 @@ public class PlayFabLogin : MonoBehaviour{
         outputText.text = outputMessage;
         GlobalVariables.Score= 0;
         GlobalVariables.Playername = result.InfoResultPayload.AccountInfo.Username;
+        Debug.Log(outputMessage);
     }
 
     void OnLoginError(PlayFabError error){
@@ -79,6 +82,6 @@ public class PlayFabLogin : MonoBehaviour{
     }
 
     public void UserNameChangeHandler(string username){
-        Debug.Log("Bienvenido "+GlobalVariables.Playername);
+        canvasManager.mainMenuLogged();
     }
 }
