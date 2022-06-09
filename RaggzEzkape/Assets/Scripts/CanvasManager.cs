@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine.UI;
 
 public enum CanvasType
 {
@@ -15,6 +16,11 @@ public class CanvasManager : Singleton<CanvasManager>
 {
     List<CanvasController> canvasControllerList;
     CanvasController lastActiveCanvas;
+
+    public Text usernameText;
+
+    public GameObject loggedMenu;
+    public GameObject unloggedMenu;
 
     protected override void Awake()
     {
@@ -35,13 +41,27 @@ public class CanvasManager : Singleton<CanvasManager>
         if (desiredCanvas != null)
         {
             desiredCanvas.gameObject.SetActive(true);
-            lastActiveCanvas = desiredCanvas;        }
-        else { Debug.LogWarning("The desired canvas was not found!"); }
+            lastActiveCanvas = desiredCanvas;
+            if(_type == CanvasType.MainMenu){
+                mainMenuLogged();
+            }
+        }
+        else {
+            Debug.LogWarning("The desired canvas was not found!"); 
+        }
     }
 
     public void mainMenuLogged(){
-        Debug.Log("Se activa el Logged Menu");
+        if(GlobalVariables.Playername != null){
+            usernameText.text = GlobalVariables.Playername.ToUpper();
+            unloggedMenu.SetActive(false);
+            loggedMenu.SetActive(true);
+        }
+
     }
 
-
- }
+    public void mainMenuUnlogged(){
+        unloggedMenu.SetActive(true);
+        loggedMenu.SetActive(false);
+    }
+}

@@ -72,7 +72,8 @@ public class PlayFabLogin : MonoBehaviour{
         outputText.text = outputMessage;
         GlobalVariables.Score= 0;
         GlobalVariables.Playername = result.InfoResultPayload.AccountInfo.Username;
-        Debug.Log(outputMessage);
+        userNameMail.text=null;
+        password.text=null;
     }
 
     void OnLoginError(PlayFabError error){
@@ -84,4 +85,5 @@ public class PlayFabLogin : MonoBehaviour{
     public void UserNameChangeHandler(string username){
         canvasManager.mainMenuLogged();
     }
+
 }

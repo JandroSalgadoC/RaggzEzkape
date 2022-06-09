@@ -70,10 +70,13 @@ public class PlayFabRegister : MonoBehaviour{
     void OnRegisterSuccess(RegisterPlayFabUserResult result){
         outputMessage = "Registered and logged successfully!";
         outputText.text = outputMessage;
-        GlobalVariables.Score = 3;
+        GlobalVariables.Score = 0;
         GlobalVariables.Playername = userName.text.ToLower();
-        Debug.Log(GlobalVariables.Playername);
-        Debug.Log(GlobalVariables.Score);
+        mail.text=null;
+        userName.text=null;
+        password.text=null;
+        passwordR.text=null;
+
     }
 
     void OnRegisterError(PlayFabError error){
