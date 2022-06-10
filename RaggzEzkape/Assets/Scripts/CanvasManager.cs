@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public enum CanvasType
 {
     MainMenu,
-    RegisterMenu
+    RegisterMenu,
+    GameUI
 }
 
 public class CanvasManager : Singleton<CanvasManager>
@@ -57,7 +58,6 @@ public class CanvasManager : Singleton<CanvasManager>
             unloggedMenu.SetActive(false);
             loggedMenu.SetActive(true);
         }
-
     }
 
     public void mainMenuUnlogged(){
