@@ -15,9 +15,9 @@ public class RaggSalto : MonoBehaviour
 
     private Vector3 groundedRaycastDirection;
 
-    private float coyoteTime = 0.2f;
+    private float coyoteTime = 0.1f;
     private float coyoteTimeCounter;
-    private float jumpBufferTime = 0.1f;
+    private float jumpBufferTime = 0.3f;
     private float jumpBufferCounter;
 
     //Uso Awake en lugar de Start porque necesito que las variables de dentro se 
