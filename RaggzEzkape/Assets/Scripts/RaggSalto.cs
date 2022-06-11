@@ -17,6 +17,8 @@ public class RaggSalto : MonoBehaviour
 
     private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
+    private float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter;
 
     //Uso Awake en lugar de Start porque necesito que las variables de dentro se 
     //incialicen antes que incluso los que haya dentro de Start en otros scripts 
@@ -33,9 +35,9 @@ public class RaggSalto : MonoBehaviour
     //caso de tratar con físicas, que es el caso:
     void FixedUpdate()
     {
-        if(rb.velocity.y < 0){
+        if(rb.velocity.y < 0 && !IsGrounded()){
             rb.gravityScale = fallMultiplier;
-        }else if(rb.velocity.y > 0 && !(Input.GetKey(KeyCode.Space))){
+        }else if(rb.velocity.y > 0 && !IsGrounded() && !(Input.GetKey(KeyCode.Space))){
             rb.gravityScale = fallMultiplier;
             coyoteTimeCounter = 0;
         }else{
@@ -50,11 +52,19 @@ public class RaggSalto : MonoBehaviour
 
         }else{
             coyoteTimeCounter -= Time.deltaTime;
-
         }
 
-        if((Input.GetKeyDown(KeyCode.Space) && coyoteTimeCounter > 0f)){
+        if(Input.GetKeyDown(KeyCode.Space)){
+            jumpBufferCounter = jumpBufferTime;
+
+        }else{
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        if((jumpBufferCounter > 0 && coyoteTimeCounter > 0)){
             Jump();
+            jumpBufferCounter = 0;
+            
         }
 
     }

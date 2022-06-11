@@ -104,8 +104,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.8329749, y: 3.3869123}
-  - {x: 2.7288675, y: 3.408763}
+  - {x: -1.97, y: 3.4}
+  - {x: 2.89, y: 3.4}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -126,8 +126,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -3.2314415, y: 0.17480838}
-  - {x: -1.7287455, y: 0.2622125}
+  - {x: -3.2314415, y: 0.17}
+  - {x: -1.7287455, y: 0.17}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -148,8 +148,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.2211456, y: 0.41516984}
-  - {x: 3.362548, y: 0.4370209}
+  - {x: -1.2211456, y: 0.41}
+  - {x: 3.362548, y: 0.41}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -169,7 +169,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
