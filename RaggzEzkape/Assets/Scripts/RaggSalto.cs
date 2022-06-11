@@ -5,11 +5,18 @@ using UnityEngine;
 public class RaggSalto : MonoBehaviour
 {
     //Creo las variables para el RigidBody y los multiplicadores de salto:
-    private bool grounded;
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpMultiplier;
     Rigidbody2D  rb;
+
+    private Vector2 groundedVectorRight;
+    private Vector2 groundedVectorLeft;
+
+    private Vector3 groundedRaycastDirection;
+
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
 
     //Uso Awake en lugar de Start porque necesito que las variables de dentro se 
     //incialicen antes que incluso los que haya dentro de Start en otros scripts 
@@ -28,26 +35,25 @@ public class RaggSalto : MonoBehaviour
     {
         if(rb.velocity.y < 0){
             rb.gravityScale = fallMultiplier;
-        }else if(rb.velocity.y > 0 && !(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))){
+        }else if(rb.velocity.y > 0 && !(Input.GetKey(KeyCode.Space))){
             rb.gravityScale = fallMultiplier;
+            coyoteTimeCounter = 0;
         }else{
             rb.gravityScale = 1f;
         }
     }
 
-    void Update()
-    {
-        Vector3 down = transform.TransformDirection(Vector3.down) * 1f;
-        Debug.DrawRay(transform.position, down, Color.red);
+    void Update(){
 
-        if(Physics2D.Raycast(transform.position, Vector2.down, 1f)){
-            
-            grounded = true;
+        if(IsGrounded()){
+            coyoteTimeCounter = coyoteTime;
+
         }else{
-            grounded = false;
+            coyoteTimeCounter -= Time.deltaTime;
+
         }
 
-        if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && grounded){
+        if((Input.GetKeyDown(KeyCode.Space) && coyoteTimeCounter > 0f)){
             Jump();
         }
 
@@ -55,5 +61,20 @@ public class RaggSalto : MonoBehaviour
 
     private void Jump(){
         rb.AddForce(Vector2.up*jumpForce);
+    }
+
+    private bool IsGrounded(){
+        groundedRaycastDirection = transform.TransformDirection(Vector3.down) * 1f;
+        groundedVectorLeft = new Vector2(transform.position.x-0.5f, transform.position.y);
+        groundedVectorRight = new Vector2(transform.position.x+0.5f, transform.position.y);
+        Debug.DrawRay(groundedVectorLeft, groundedRaycastDirection, Color.red);
+        Debug.DrawRay(groundedVectorRight, groundedRaycastDirection, Color.yellow);
+
+
+        if(Physics2D.Raycast(groundedVectorLeft, Vector2.down, 1f) || Physics2D.Raycast(groundedVectorRight, Vector2.down, 1f)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
