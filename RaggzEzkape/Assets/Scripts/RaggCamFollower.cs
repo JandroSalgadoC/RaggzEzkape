@@ -12,7 +12,7 @@ public class RaggCamFollower : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = new Vector3((character.position.x+4), (character.position.y+1), transform.position.z);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaggSalto : MonoBehaviour
 {
     //Creo las variables para el RigidBody y los multiplicadores de salto:
-    private bool Grounded;
+    private bool grounded;
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpMultiplier;
@@ -37,14 +37,17 @@ public class RaggSalto : MonoBehaviour
 
     void Update()
     {
+        Vector3 down = transform.TransformDirection(Vector3.down) * 1f;
+        Debug.DrawRay(transform.position, down, Color.red);
 
         if(Physics2D.Raycast(transform.position, Vector2.down, 1f)){
-            Grounded = true;
+            
+            grounded = true;
         }else{
-            Grounded = false;
+            grounded = false;
         }
 
-        if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && Grounded){
+        if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && grounded){
             Jump();
         }
 
