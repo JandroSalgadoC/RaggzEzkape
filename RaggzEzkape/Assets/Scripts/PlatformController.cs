@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     public bool isEnabled;
+    public Vector2 topColliderPosition;
     // Awake is called before the first frame update
     void Awake(){
         isEnabled = false;
@@ -19,10 +20,25 @@ public class PlatformController : MonoBehaviour
     {
         if (isEnabled) {
             transform.position += Vector3.left * Time.deltaTime * GlobalVariables.Velocity;
-            if(transform.position.x < -10){
+            if(GetTopColliderRightPosition().x < -16){
                 transform.position = new Vector3(35,0,0);
                 isEnabled = false;
             }
         }
+    }
+
+    public Vector2 GetTopColliderPosition(int point){
+        return transform.GetComponent<EdgeCollider2D>().points[point];
+    }
+
+    public Vector2 GetTopColliderBounds(){
+        return transform.GetComponent<EdgeCollider2D>().bounds.center;
+    }
+
+    public Vector2 GetTopColliderLeftPosition(){
+        return new Vector2((GetTopColliderBounds().x+GetTopColliderPosition(0).x),GetTopColliderBounds().y);
+    }
+    public Vector2 GetTopColliderRightPosition(){
+        return new Vector2((GetTopColliderBounds().x+GetTopColliderPosition(1).x),GetTopColliderBounds().y);
     }
 }

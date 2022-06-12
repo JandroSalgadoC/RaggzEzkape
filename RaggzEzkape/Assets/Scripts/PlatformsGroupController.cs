@@ -13,15 +13,17 @@ public class PlatformsGroupController : MonoBehaviour
         foreach (Transform child in transform){
             platformsList.Add(child);
         }
-        Debug.Log(platformsList.Count);
-        platformsList[0].GetComponent<PlatformController>().isEnabled=true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        sendPlatformToGame();
+        //Debug.Log(platformsList[0].GetComponent<PlatformController>().GetTopColliderRightPosition());
+    }
 
-
+    void sendPlatformToGame(){
+        platformsList[choosePlatform()].GetComponent<PlatformController>().isEnabled=true;
     }
 
     int choosePlatform(){
