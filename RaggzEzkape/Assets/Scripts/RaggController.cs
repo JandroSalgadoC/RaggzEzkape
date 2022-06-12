@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaggSalto : MonoBehaviour
+public class RaggController : MonoBehaviour
 {
     //Creo las variables para el RigidBody y los multiplicadores de salto:
     public float jumpForce;
@@ -35,21 +35,37 @@ public class RaggSalto : MonoBehaviour
     //caso de tratar con físicas, que es el caso:
     void FixedUpdate()
     {
+        GlobalVariables.Distance += GlobalVariables.Velocity * Time.fixedDeltaTime;
+        GlobalVariables.Score =  Mathf.FloorToInt(GlobalVariables.Distance);
+
+        if(IsGrounded()){
+            float velocityRatio = GlobalVariables.Velocity/GlobalVariables.MaxVelocity;
+            GlobalVariables.Acceleration = GlobalVariables.MaxAcceleration * (1-velocityRatio);
+            GlobalVariables.Velocity += GlobalVariables.Acceleration * Time.fixedDeltaTime;
+            if(GlobalVariables.Velocity > GlobalVariables.MaxVelocity){
+                GlobalVariables.Velocity = GlobalVariables.MaxVelocity;
+            }
+        }
+
         if(rb.velocity.y < 0 && !IsGrounded()){
             rb.gravityScale = fallMultiplier;
+
         }else if(rb.velocity.y > 0 && !IsGrounded() && !(Input.GetKey(KeyCode.Space))){
             rb.gravityScale = fallMultiplier;
             coyoteTimeCounter = 0;
         }else{
             rb.gravityScale = 1f;
         }
+        
     }
 
     void Update(){
 
+        
         if(IsGrounded()){
             coyoteTimeCounter = coyoteTime;
 
+            
         }else{
             coyoteTimeCounter -= Time.deltaTime;
         }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7229597566475890704}
   - component: {fileID: 2617635260714492780}
   - component: {fileID: 6592321315481028672}
+  - component: {fileID: -3307707092002148681}
   m_Layer: 0
   m_Name: Platform_Casa_C
   m_TagString: Untagged
@@ -173,3 +174,16 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &-3307707092002148681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914116407727323321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd7bca418e8670449538fb715e24e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnabled: 0

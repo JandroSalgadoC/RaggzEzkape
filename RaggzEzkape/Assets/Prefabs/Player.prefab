@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 7528427259276831150}
   - component: {fileID: 7528427259276830800}
   - component: {fileID: 7528427259276831151}
-  - component: {fileID: 7528427259276830802}
-  - component: {fileID: 7528427259276830801}
   - component: {fileID: 7528427259276830803}
   - component: {fileID: 7528427259276830804}
+  - component: {fileID: 2586410772731240400}
   m_Layer: 0
-  m_Name: Ragg
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,34 +108,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7528427259276830802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7528427259276831149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4079e806b2a87c44dbb69a0a5b089502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RaggSpeed: 0
---- !u!114 &7528427259276830801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7528427259276831149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164fec1da031f164db87950cda84d17a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 0
-  fallMultiplier: 0
-  lowJumpMultiplier: 0
 --- !u!50 &7528427259276830803
 Rigidbody2D:
   serializedVersion: 4
@@ -184,3 +155,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0688033, y: 0.9101199}
   m_EdgeRadius: 0
+--- !u!114 &2586410772731240400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528427259276831149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a1be814675a1845878d7407f22c81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 0
+  fallMultiplier: 0
+  lowJumpMultiplier: 0

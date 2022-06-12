@@ -18,6 +18,8 @@ public class GameUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scoreOutput.text = GlobalVariables.Score.ToString();
+        Debug.Log(GlobalVariables.Distance);
 
     }
 }

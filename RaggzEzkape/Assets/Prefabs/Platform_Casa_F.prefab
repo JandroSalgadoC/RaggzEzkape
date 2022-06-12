@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1734738084606447624}
   - component: {fileID: 1255790838416659136}
   - component: {fileID: 3758316146794733890}
+  - component: {fileID: 4092187776495090168}
   m_Layer: 0
   m_Name: Platform_Casa_F
   m_TagString: Untagged
@@ -127,3 +128,16 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &4092187776495090168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131115949257123613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd7bca418e8670449538fb715e24e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnabled: 0
