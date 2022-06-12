@@ -21,7 +21,7 @@ public class PlatformController : MonoBehaviour
         if (isEnabled) {
             transform.position += Vector3.left * Time.deltaTime * GlobalVariables.Velocity;
             if(GetTopColliderRightPosition().x < -16){
-                transform.position = new Vector3(35,0,0);
+                transform.position = new Vector3(20,0,0);
                 isEnabled = false;
             }
         }
