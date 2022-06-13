@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class RaggController : MonoBehaviour
 {
+    public bool isDead = false;
     //Creo las variables para el RigidBody y los multiplicadores de salto:
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpMultiplier;
     Rigidbody2D  rb;
+    
 
     private Vector2 groundedVectorRight;
     private Vector2 groundedVectorLeft;
@@ -60,8 +62,6 @@ public class RaggController : MonoBehaviour
     }
 
     void Update(){
-
-        
         if(IsGrounded()){
             coyoteTimeCounter = coyoteTime;
 
@@ -81,6 +81,10 @@ public class RaggController : MonoBehaviour
             Jump();
             jumpBufferCounter = 0;
             
+        }
+
+        if(transform.position.y < -25){
+            isDead = true;
         }
 
     }

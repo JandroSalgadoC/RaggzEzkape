@@ -13,7 +13,7 @@ public class PlatformsGroupController : MonoBehaviour
         foreach (Transform child in transform)
         {
             platformsList.Add(child);
-            
+
         }
 
         for(int i = 0; i < platformsList.Count;i++){
@@ -24,9 +24,9 @@ public class PlatformsGroupController : MonoBehaviour
     void Start()
     {
         platformsList[0].GetComponent<PlatformController>().isEnabled = true;
+        platformsList[7].GetComponent<PlatformController>().isEnabled = true;
         platformsList[4].GetComponent<PlatformController>().isEnabled = true;
-        platformsList[3].GetComponent<PlatformController>().isEnabled = true;
-        lastPlatform = platformsList[3]; 
+        lastPlatform = platformsList[4]; 
     }
 
     // Update is called once per frame
@@ -47,6 +47,8 @@ public class PlatformsGroupController : MonoBehaviour
     void sendPlatformToGame()
     {
         lastPlatform = platformsList[choosePlatform()];
+
+        
         lastPlatform.GetComponent<PlatformController>().isEnabled = true;
     }
 
