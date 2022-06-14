@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -436.94, y: -317}
+  m_AnchoredPosition: {x: -436.94, y: -317.00006}
   m_SizeDelta: {x: -1393.12, y: -912.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &33099278
@@ -2659,7 +2659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -437.44, y: -140.62}
+  m_AnchoredPosition: {x: -437.44, y: -140.62003}
   m_SizeDelta: {x: -1484.76, y: -947.91003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863359802
@@ -3305,7 +3305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1064470297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3742,6 +3742,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b3d548b61e7484e9c6a58385fbc9d2, type: 3}
+--- !u!1 &1164342482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7528427259276831149, guid: e387d36fecfa433498ebff6215afc7bf, type: 3}
+  m_PrefabInstance: {fileID: 1292747484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1169445091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5286,7 +5291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1589176586
 Transform:
   m_ObjectHideFlags: 0
@@ -5587,6 +5592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformsList: []
   lastPlatform: {fileID: 0}
+  player: {fileID: 1164342482}
 --- !u!1 &1892365888
 GameObject:
   m_ObjectHideFlags: 0

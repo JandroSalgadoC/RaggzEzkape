@@ -39,6 +39,7 @@ public class PlatformController : MonoBehaviour
         return new Vector2((GetTopColliderBounds().x+GetTopColliderPosition(0).x),GetTopColliderBounds().y);
     }
     public Vector2 GetTopColliderRightPosition(){
+        Debug.Log(new Vector2((GetTopColliderBounds().x+GetTopColliderPosition(1).x),GetTopColliderBounds().y));
         return new Vector2((GetTopColliderBounds().x+GetTopColliderPosition(1).x),GetTopColliderBounds().y);
     }
 }

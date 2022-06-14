@@ -22,6 +22,7 @@ public class RaggController : MonoBehaviour
     private float jumpBufferTime = 0.3f;
     private float jumpBufferCounter;
 
+
     //Uso Awake en lugar de Start porque necesito que las variables de dentro se 
     //incialicen antes que incluso los que haya dentro de Start en otros scripts 
     //para mejorar la estabilidad del código.
@@ -58,7 +59,6 @@ public class RaggController : MonoBehaviour
         }else{
             rb.gravityScale = 1f;
         }
-        
     }
 
     void Update(){
@@ -72,7 +72,6 @@ public class RaggController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space)){
             jumpBufferCounter = jumpBufferTime;
-
         }else{
             jumpBufferCounter -= Time.deltaTime;
         }
@@ -90,7 +89,8 @@ public class RaggController : MonoBehaviour
     }
 
     private void Jump(){
-        rb.AddForce(Vector2.up*jumpForce);
+        
+        rb.AddForce(Vector2.up*(jumpForce+GlobalVariables.Velocity));
     }
 
     private bool IsGrounded(){
