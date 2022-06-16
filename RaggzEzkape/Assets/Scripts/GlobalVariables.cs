@@ -43,8 +43,8 @@ public class GlobalVariables : MonoBehaviour
 
     //VARIABLES DE JUEGO
 
-    private static float v_distance = 0;
-    public static float Distance{
+    private static int v_distance = 0;
+    public static int Distance{
         get{
             return v_distance;
         }

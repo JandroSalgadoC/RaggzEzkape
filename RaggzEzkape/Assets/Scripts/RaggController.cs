@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RaggController : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class RaggController : MonoBehaviour
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpMultiplier;
-    Rigidbody2D  rb;
-    
+    Rigidbody2D rb;
+
+    public GameController GameController;
+
 
     private Vector2 groundedVectorRight;
     private Vector2 groundedVectorLeft;
@@ -38,72 +41,100 @@ public class RaggController : MonoBehaviour
     //caso de tratar con físicas, que es el caso:
     void FixedUpdate()
     {
-        GlobalVariables.Distance += GlobalVariables.Velocity * Time.fixedDeltaTime;
-        GlobalVariables.Score =  Mathf.FloorToInt(GlobalVariables.Distance);
+        if (!isDead)
+        {
 
-        if(IsGrounded()){
-            float velocityRatio = GlobalVariables.Velocity/GlobalVariables.MaxVelocity;
-            GlobalVariables.Acceleration = GlobalVariables.MaxAcceleration * (1-velocityRatio);
-            GlobalVariables.Velocity += GlobalVariables.Acceleration * Time.fixedDeltaTime;
-            if(GlobalVariables.Velocity > GlobalVariables.MaxVelocity){
-                GlobalVariables.Velocity = GlobalVariables.MaxVelocity;
+            GlobalVariables.Distance += (int)(GlobalVariables.Velocity * Time.fixedDeltaTime*10);
+
+            if (IsGrounded())
+            {
+                float velocityRatio = GlobalVariables.Velocity / GlobalVariables.MaxVelocity;
+                GlobalVariables.Acceleration = GlobalVariables.MaxAcceleration * (1 - velocityRatio);
+                GlobalVariables.Velocity += GlobalVariables.Acceleration * Time.fixedDeltaTime;
+                if (GlobalVariables.Velocity > GlobalVariables.MaxVelocity)
+                {
+                    GlobalVariables.Velocity = GlobalVariables.MaxVelocity;
+                }
+            }
+            if (rb.velocity.y < 0 && !IsGrounded())
+            {
+                rb.gravityScale = fallMultiplier;
+
+            }
+            else if (rb.velocity.y > 0 && !IsGrounded() && !(Input.GetKey(KeyCode.Space)))
+            {
+                rb.gravityScale = fallMultiplier;
+                coyoteTimeCounter = 0;
+            }
+            else
+            {
+                rb.gravityScale = 1f;
             }
         }
+    }
 
-        if(rb.velocity.y < 0 && !IsGrounded()){
-            rb.gravityScale = fallMultiplier;
+    void Update()
+    {
+        if (isDead)
+        {
+            GameController.GameOver();
+        }
+        else
+        {
 
-        }else if(rb.velocity.y > 0 && !IsGrounded() && !(Input.GetKey(KeyCode.Space))){
-            rb.gravityScale = fallMultiplier;
-            coyoteTimeCounter = 0;
-        }else{
-            rb.gravityScale = 1f;
+            if (IsGrounded())
+            {
+                coyoteTimeCounter = coyoteTime;
+
+            }
+            else
+            {
+                coyoteTimeCounter -= Time.deltaTime;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jumpBufferCounter = jumpBufferTime;
+            }
+            else
+            {
+                jumpBufferCounter -= Time.deltaTime;
+            }
+
+            if ((jumpBufferCounter > 0 && coyoteTimeCounter > 0))
+            {
+                Jump();
+                jumpBufferCounter = 0;
+            }
+
+            if (transform.position.y < -15)
+            {
+                isDead = true;
+            }
         }
     }
 
-    void Update(){
-        if(IsGrounded()){
-            coyoteTimeCounter = coyoteTime;
+    private void Jump()
+    {
 
-            
-        }else{
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space)){
-            jumpBufferCounter = jumpBufferTime;
-        }else{
-            jumpBufferCounter -= Time.deltaTime;
-        }
-
-        if((jumpBufferCounter > 0 && coyoteTimeCounter > 0)){
-            Jump();
-            jumpBufferCounter = 0;
-            
-        }
-
-        if(transform.position.y < -25){
-            isDead = true;
-        }
-
+        rb.AddForce(Vector2.up * (jumpForce + GlobalVariables.Velocity));
     }
 
-    private void Jump(){
-        
-        rb.AddForce(Vector2.up*(jumpForce+GlobalVariables.Velocity));
-    }
-
-    private bool IsGrounded(){
+    private bool IsGrounded()
+    {
         groundedRaycastDirection = transform.TransformDirection(Vector3.down) * 1f;
-        groundedVectorLeft = new Vector2(transform.position.x-0.5f, transform.position.y);
-        groundedVectorRight = new Vector2(transform.position.x+0.5f, transform.position.y);
+        groundedVectorLeft = new Vector2(transform.position.x - 0.5f, transform.position.y);
+        groundedVectorRight = new Vector2(transform.position.x + 0.5f, transform.position.y);
         Debug.DrawRay(groundedVectorLeft, groundedRaycastDirection, Color.red);
         Debug.DrawRay(groundedVectorRight, groundedRaycastDirection, Color.yellow);
 
 
-        if(Physics2D.Raycast(groundedVectorLeft, Vector2.down, 1f) || Physics2D.Raycast(groundedVectorRight, Vector2.down, 1f)){
+        if (Physics2D.Raycast(groundedVectorLeft, Vector2.down, 1f) || Physics2D.Raycast(groundedVectorRight, Vector2.down, 1f))
+        {
             return true;
-        }else{
+        }
+        else
+        {
             return false;
         }
     }

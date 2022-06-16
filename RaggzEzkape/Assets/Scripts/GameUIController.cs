@@ -12,14 +12,12 @@ public class GameUIController : MonoBehaviour
     void Start()
     {
         userNameOutput.text += GlobalVariables.Playername!=null?GlobalVariables.Playername.ToUpper():"Guest";
-        scoreOutput.text += GlobalVariables.Score.ToString();
+        scoreOutput.text = "Score: "+GlobalVariables.Distance.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreOutput.text = GlobalVariables.Score.ToString();
-        Debug.Log(GlobalVariables.Distance);
-
+        scoreOutput.text = "Score: "+GlobalVariables.Distance.ToString();
     }
 }
