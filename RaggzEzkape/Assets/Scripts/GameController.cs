@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
             if (GlobalVariables.Playername != "Guest" && GlobalVariables.Playername != null)
             {
                 playFabLeatherBoardManager.SendLeaderBoard(GlobalVariables.Distance);
+                playFabLeatherBoardManager.GetLeaderBoard();
             }
             else
             {

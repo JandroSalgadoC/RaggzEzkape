@@ -60,6 +60,7 @@ public class PlayFabRegister : MonoBehaviour{
             Email = mailText,
             Username = userNameText,
             Password = passwordText,
+            DisplayName = userNameText,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams{
                 GetUserAccountInfo = true
             }
