@@ -7,14 +7,17 @@ public class ParallaxLayerController : MonoBehaviour
 
     public float LayerOrderSpeed;
     private float layerLenght;
-    private float startPos;
+    private Vector3 startPos;
     // Start is called before the first frame update
+    void Awake(){
+        Debug.Log("Awake");
+        startPos = transform.position;
+        layerLenght = GetComponent<SpriteRenderer>().bounds.size.x;
+    }
     void Start()
     {
-        startPos = transform.position.x;
-        layerLenght = GetComponent<SpriteRenderer>().bounds.size.x;
-
-
+        Debug.Log("Start");
+        transform.position = startPos;
     }
 
     // Update is called once per frame

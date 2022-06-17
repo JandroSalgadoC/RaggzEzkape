@@ -30,6 +30,7 @@ public class PlatformsGroupController : MonoBehaviour
     }
 
    void OnEnable() {
+    Debug.LogWarning("Platform controller enabled");
         Start();
     }
 
