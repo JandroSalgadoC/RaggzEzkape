@@ -8,6 +8,11 @@ public class PlatformsGroupController : MonoBehaviour
     public Transform lastPlatform;
 
     public GameObject player;
+    public Vector3 raggOrigin;
+    public Vector3 platformAOrigin;
+    public Vector3 platformBOrigin;
+    public Vector3 platformCOrigin;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -17,6 +22,10 @@ public class PlatformsGroupController : MonoBehaviour
             platformsList.Add(child);
 
         }
+        raggOrigin = player.transform.position;
+        platformAOrigin = platformsList[0].transform.position;
+        platformBOrigin = platformsList[4].transform.position;
+        platformCOrigin = platformsList[3].transform.position;
 
     }
 
@@ -26,7 +35,14 @@ public class PlatformsGroupController : MonoBehaviour
 
    void Start()
     {
-        player.transform.position = new Vector3(-7.59000015f,5.82000017f,0);
+        foreach (Transform platform in platformsList){
+            platform.transform.position = new Vector3(20,0,0);
+        }
+        player.transform.position = raggOrigin;
+        platformsList[0].transform.position  =  platformAOrigin;
+        platformsList[4].transform.position =  platformBOrigin;
+        platformsList[3].transform.position =  platformCOrigin;
+
         platformsList[0].GetComponent<PlatformController>().isEnabled = true;
         platformsList[4].GetComponent<PlatformController>().isEnabled = true;
         platformsList[3].GetComponent<PlatformController>().isEnabled = true;

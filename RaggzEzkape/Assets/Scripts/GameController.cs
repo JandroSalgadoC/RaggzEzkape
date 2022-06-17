@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        //Game.SetActive(false);        
         if (!isOver)
         {
             isOver = true;
