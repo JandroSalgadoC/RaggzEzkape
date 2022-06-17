@@ -23,6 +23,8 @@ public class CanvasManager : Singleton<CanvasManager>
     public GameObject loggedMenu;
     public GameObject unloggedMenu;
 
+    public PlayFabLeatherBoardManager playFabLeatherBoardManager;
+
     protected override void Awake()
     {
         base.Awake();
@@ -57,6 +59,7 @@ public class CanvasManager : Singleton<CanvasManager>
             usernameText.text = GlobalVariables.Playername.ToUpper();
             unloggedMenu.SetActive(false);
             loggedMenu.SetActive(true);
+            playFabLeatherBoardManager.GetLeaderBoard();
         }
     }
 
