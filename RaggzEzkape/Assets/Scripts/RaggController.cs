@@ -37,6 +37,10 @@ public class RaggController : MonoBehaviour
         lowJumpMultiplier = 2f;
     }
 
+    void OnEnable(){
+        isDead = false;
+    }
+
     //Uso FixedUpdate en lugar de Update porque la Documentación recomienda su uso en 
     //caso de tratar con físicas, que es el caso:
     void FixedUpdate()

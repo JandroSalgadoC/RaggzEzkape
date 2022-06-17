@@ -20,8 +20,13 @@ public class PlatformsGroupController : MonoBehaviour
 
     }
 
-    void Start()
+   void OnEnable() {
+        Start();
+    }
+
+   void Start()
     {
+        player.transform.position = new Vector3(-7.59000015f,5.82000017f,0);
         platformsList[0].GetComponent<PlatformController>().isEnabled = true;
         platformsList[4].GetComponent<PlatformController>().isEnabled = true;
         platformsList[3].GetComponent<PlatformController>().isEnabled = true;

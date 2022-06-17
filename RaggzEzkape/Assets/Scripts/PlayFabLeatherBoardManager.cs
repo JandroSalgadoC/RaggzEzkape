@@ -13,9 +13,6 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
     public Transform rowParent;
 
 
-
-
-
     public void GetLeaderBoard()
     {
         var request = new GetLeaderboardRequest

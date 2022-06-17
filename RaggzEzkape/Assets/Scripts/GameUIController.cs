@@ -11,7 +11,11 @@ public class GameUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        userNameOutput.text += GlobalVariables.Playername!=null?GlobalVariables.Playername.ToUpper():"Guest";
+        userNameOutput.text = GlobalVariables.Playername!=null?GlobalVariables.Playername.ToUpper():"Guest";
+        scoreOutput.text = "Score: "+GlobalVariables.Distance.ToString();
+    }
+    void OnEnable() {
+        userNameOutput.text = GlobalVariables.Playername!=null?GlobalVariables.Playername.ToUpper():"Guest";
         scoreOutput.text = "Score: "+GlobalVariables.Distance.ToString();
     }
 
