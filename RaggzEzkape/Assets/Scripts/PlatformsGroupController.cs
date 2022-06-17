@@ -50,7 +50,7 @@ public class PlatformsGroupController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (lastPlatform.GetComponent<PlatformController>().GetTopColliderRightPosition().x < 6.5)
         {
