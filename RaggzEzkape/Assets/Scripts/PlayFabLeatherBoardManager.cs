@@ -1,6 +1,4 @@
-using System.Net.Mail;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +9,11 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
 {
 
     String outputMessage;
+    public GameObject rowPrefab;
+    public Transform rowParent;
+
+
+
 
 
     public void GetLeaderBoard()
@@ -26,9 +29,17 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
 
     void OnLeaderBoardGet(GetLeaderboardResult result)
     {
+        foreach (Transform item in rowParent){
+            Destroy(item.gameObject);
+        }
+
         foreach (var item in result.Leaderboard)
         {
-            Debug.Log(item.DisplayName);
+            GameObject newRow = Instantiate(rowPrefab, rowParent);
+            Text[] texts = newRow.GetComponentsInChildren<Text>();
+            texts[0].text = (item.Position + 1).ToString();
+            texts[1].text = item.DisplayName.ToString();
+            texts[2].text = item.StatValue.ToString();
         }
 
     }
@@ -49,9 +60,7 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
 
     void OnLeaderBoardUpdate(UpdatePlayerStatisticsResult result)
     {
-        //var errorMessage = error.GenerateErrorReport().Split(':');
         outputMessage = "Leaderboard Successfully Updated!";
-        //outputText.text = outputMessage;
         Debug.Log(outputMessage);
     }
 
@@ -63,5 +72,4 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
         //outputText.text = outputMessage;
         Debug.Log(outputMessage);
     }
-
 }

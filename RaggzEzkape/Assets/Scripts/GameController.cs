@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class GameController : MonoBehaviour
 {
@@ -22,12 +23,14 @@ public class GameController : MonoBehaviour
             if (GlobalVariables.Playername != "Guest" && GlobalVariables.Playername != null)
             {
                 playFabLeatherBoardManager.SendLeaderBoard(GlobalVariables.Distance);
-                playFabLeatherBoardManager.GetLeaderBoard();
             }
             else
             {
                 Debug.Log("Login to upload Score");
             }
+            playFabLeatherBoardManager.GetLeaderBoard();
         }
     }
+
+
 }
