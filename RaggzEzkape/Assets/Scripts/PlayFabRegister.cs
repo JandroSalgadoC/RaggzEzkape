@@ -10,12 +10,9 @@ public class PlayFabRegister : MonoBehaviour{
     [Header("UI")]
     public Text outputText;
     public InputField mail;
-
     public InputField userName;
-
     public InputField password;
     public InputField passwordR;
-
     String outputMessage;
 
 
@@ -32,11 +29,12 @@ public class PlayFabRegister : MonoBehaviour{
         if(mailText.Length == 0 || userNameText.Length == 0 ||passwordText.Length == 0 || passwordRText.Length == 0){
             outputMessage = "All fields are required.";
         }
-        else if(regex.IsMatch(mailText) || regex.IsMatch(userNameText) ||regex.IsMatch(passwordText) ||regex.IsMatch(passwordText)){
+        else if (regex.IsMatch(mailText) || regex.IsMatch(userNameText) || regex.IsMatch(passwordText) || regex.IsMatch(passwordText)){
+
             outputMessage = "Whitespaces are not allowed in any field.";
         }
-        else if(userNameText.Length<3 || userNameText.Length > 10){
-            outputMessage = "Username must be between 3 and 10 characters long.";
+        else if(userNameText.Length<3 || userNameText.Length > 13){
+            outputMessage = "Username must be between 3 and 13 characters long.";
         }
         else if(passwordText.Length<6){
             outputMessage = "Password must be at least 6 characters long.";

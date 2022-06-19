@@ -12,9 +12,14 @@ public class GameController : MonoBehaviour
     public PlayFabLeatherBoardManager playFabLeatherBoardManager;
     public GameObject gameoverUI;
     public CanvasManager canvasManager;
+
+    public AudioClip gameClip;
+    public AudioClip menuClip;
+    public AudioManager audioManager;
     public void GameStart()
     {
         Game.SetActive(true);
+        audioManager.ChangeMusic(gameClip);
     }
 
     
@@ -41,6 +46,7 @@ public class GameController : MonoBehaviour
     public void GoBackToMenuButton(){
         resetValues();
         canvasManager.SwitchCanvas(CanvasType.MainMenu);
+        audioManager.ChangeMusic(menuClip);
     }
 
     public void resetValues(){

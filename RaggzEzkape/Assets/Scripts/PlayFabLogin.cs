@@ -12,9 +12,7 @@ public class PlayFabLogin : MonoBehaviour{
     [Header("UI")]
     public Text outputText;
     public InputField userNameMail;
-
     public InputField password;
-
     String outputMessage;
 
 

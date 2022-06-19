@@ -38,7 +38,6 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
             texts[1].text = item.DisplayName.ToString();
             texts[2].text = item.StatValue.ToString();
         }
-
     }
 
     public void SendLeaderBoard(int score)
@@ -60,7 +59,6 @@ public class PlayFabLeatherBoardManager : MonoBehaviour
         outputMessage = "Leaderboard Successfully Updated!";
         Debug.Log(outputMessage);
     }
-
 
     void OnLeaderBoardError(PlayFabError error)
     {
