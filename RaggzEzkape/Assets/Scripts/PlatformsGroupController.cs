@@ -84,7 +84,7 @@ public class PlatformsGroupController : MonoBehaviour
     {
         if (platformsList.Count > 0)
         {
-            return Random.Range(0, platformsList.Count - 1);
+            return Random.Range(0, platformsList.Count);
         }
         else
         {

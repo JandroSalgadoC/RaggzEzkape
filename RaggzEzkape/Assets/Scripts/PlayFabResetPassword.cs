@@ -29,6 +29,9 @@ public class PlayFabResetPassword : MonoBehaviour{
             };
             PlayFabClientAPI.SendAccountRecoveryEmail(request, OnSuccess, OnError);
         }
+        else{
+            outputMessage = "Please enter a valid recovery email address.";
+        }
 
         try{
             outputText.text = outputMessage;

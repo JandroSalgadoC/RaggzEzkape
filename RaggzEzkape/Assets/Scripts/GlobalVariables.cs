@@ -6,8 +6,7 @@ using PlayFab.ClientModels;
 
 public class GlobalVariables : MonoBehaviour
 {
-    //VARIABLES DE JUGADOR
-    private static int v_score;    
+    private static int v_score;
     public static int Score{
         get{
             return v_score;
@@ -39,9 +38,6 @@ public class GlobalVariables : MonoBehaviour
 
     public delegate void SetUsername(string newVal);
     public static event SetUsername OnUsernameChange;
-
-
-    //VARIABLES DE JUEGO
 
     private static int v_distance = 0;
     public static int Distance{
